@@ -23,76 +23,128 @@ STEP 6: Use zscore of to remove outliers
 # Coding and Output
 ## Data cleaning
 ### 1) Read and display DataFrame
-```
+```python
 import pandas as pd
 df=pd.read_csv("/content/SAMPLEIDS.csv")
 df
 ```
 ![image](https://github.com/Augustine0306/exno1/assets/119404460/34e7e05b-0269-4ab9-95c7-2af342e14228)
-### 2) Display head
+```python
+import pandas as pd
+df=pd.read_csv('/content/SAMPLEIDS.csv')
+print(df.info)
 ```
-df.head(4)
+![image](https://github.com/Augustine0306/exno1/assets/119404460/31d1d853-67bd-483c-a030-c10a1cfd9093)
+```python
+import pandas as pd
+import pandas as pd
+df=pd.read_csv('/content/SAMPLEIDS.csv')
+print(df.head(13))
 ```
-![image](https://github.com/Augustine0306/exno1/assets/119404460/0179d83b-1c34-4c2c-9718-672b0b580ade)
-### 3) Display tail
+![image](https://github.com/Augustine0306/exno1/assets/119404460/b1b043d7-f24e-4e4b-baa1-8a4d36c8e8f3)
+```python
+import pandas as pd
+print(df.tail(12))
 ```
-df.tail(4)
+![image](https://github.com/Augustine0306/exno1/assets/119404460/430923ea-9a22-40e4-96ee-abbc5b4dfb2d)
+```python
+import pandas as pd
+print(df.describe)
 ```
-![image](https://github.com/Augustine0306/exno1/assets/119404460/eb3af614-0f06-4b5c-ace5-fa39c4a622ed)
-### 4) Info of datafram
-```
-df.info(3)
-```
-![image](https://github.com/Augustine0306/exno1/assets/119404460/50d658d6-0c3a-4ece-865f-f24a9b52b268)
-### 5) Describe about the dataframe
-```
-df.describe()
-```
-![image](https://github.com/Augustine0306/exno1/assets/119404460/9d809cf9-2378-4638-9ba0-777d4dcdd06d)
-### 6) Shape of the datafram
-```
-df.shape
-```
-![image](https://github.com/Augustine0306/exno1/assets/119404460/1918648e-a437-4af8-94ba-d4d041b494ac)
-### 7) Checking tha NUll values
-```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/3fb75bc6-d875-4ef4-9a82-934e5b0ca60c)
+```python
 df.isnull().sum()
 ```
-
-![image](https://github.com/Augustine0306/exno1/assets/119404460/faa4ef4d-2f34-424a-8538-de56a0282ad4)
-### 8) Drop the Null values
-```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/8a93f553-cbaf-494d-a8ac-699e426673a0)
+```python
 df.nunique()
 ```
-
-![image](https://github.com/Augustine0306/exno1/assets/119404460/b6e775f4-751b-4950-a4c8-a186c5e2a030)
-### 9) Finding the mean value
-```
-mn=df.TOTAL.mean()
-mn
-```
-
-![image](https://github.com/Augustine0306/exno1/assets/119404460/19dafe4c-9b36-42d6-b088-3f1e6e384bd1)
-### 10) Fill Null value with Mean value
-```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/279ac593-00e7-48bf-9168-9374f7b87c50)
+```python
 df.TOTAL.fillna(mn,inplace=True)
 df
 ```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/338b6311-5835-4ea3-bff4-e5953fc777aa)
+```python
+min=df.M4.min()
+min
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/b847c09d-b0ee-4c92-a231-5fed8dfe91a6)
+```python
+df.M4.fillna(min,inplace=True)
+df
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/53f56f34-885a-4066-82e0-69c2851ec03a)
 
-![image](https://github.com/Augustine0306/exno1/assets/119404460/6a7baf07-59ac-475e-9397-bd69163b71c0)
-### 11) Finding minimum value
+```python
+import pandas as pd
+import seaborn as sns
+age=[1,3,28,27,25,92,30,39,40,50,26,24,29,94]
+af=pd.DataFrame(age)
+af
 ```
-mn=df.M4.min()
-mn
-```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/9c56d5f0-bc46-4d09-96e9-33d544370eb1)
 
-![image](https://github.com/Augustine0306/exno1/assets/119404460/81fe521b-5c46-49eb-93c1-a5fe9c10627b)
-### 12) Printing only Date of Birth
+```python
+sns.boxplot(data=af)
 ```
-df['cd']=pd.to_datetime(df['DOB'])
-df['cd']
-```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/b633d964-9cbd-452b-a726-d4ae315b9620)
 
-![image](https://github.com/Augustine0306/exno1/assets/119404460/5cbf59e8-07cb-46f5-b8f3-dd2ec9e27d81)
+```python
+sns.scatterplot(data=af)
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/6ba75952-b609-453a-a788-d41fcd1a78b9)
+
+```python
+q1=af.quantile(0.25)
+q2=af.quantile(0.50)
+q3=af.quantile(0.75)
+iqr=q3-q1
+iqr
+low=q1-1.5*iqr
+low
+high=q3+1.5*iqr
+high
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/857b8d82-3d54-42f8-a32b-826a33e8c36a)
+
+```python
+af=af[((af>=low)&(af<=high))]
+af
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/2f335749-2691-410c-93d1-cb14d4deb329)
+
+```python
+af.dropna()
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/e17a299a-8287-4b20-a2ef-1aa289949c93)
+
+```python
+sns.boxplot(data=af)
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/d14df7e9-025a-4300-b9e2-651c01feee9c)
+
+```python
+sns.scatterplot(data=af)
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/9b6ba307-6de5-4d61-aae5-a0d40fe1a533)
+
+```python
+data=[1,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72,75,78,81,84,87,90,93,96,99,102,105]
+df=pd.DataFrame(data)
+df
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/72e32fb0-8c14-4c62-bc7e-5f2f66c130d2)
+
+
+```python
+import numpy as np
+from scipy import stats
+z=np.abs(stats.zscore(df))
+z
+```
+![image](https://github.com/Augustine0306/exno1/assets/119404460/65d28769-e8e8-4f0b-94c1-04e7958c625c)
+
+
 ## Result:
 Thus the program for data cleaning using python has executed successfully.
